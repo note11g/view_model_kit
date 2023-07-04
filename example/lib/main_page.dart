@@ -1,3 +1,5 @@
+import 'dart:developer';
+
 import 'package:flutter/material.dart';
 import 'package:view_model_kit/view_model_kit.dart';
 import 'package:view_model_kit_example/main_view_model.dart';
@@ -14,11 +16,25 @@ class _MainPageState extends StateWithViewModel<MainPage, MainViewModel> {
   MainViewModel createViewModel() => MainViewModel();
 
   @override
+  void initState() {
+    super.initState();
+    viewModel.counter.observe(observerA);
+    viewModel.counter.observe(observerB);
+  }
+
+  void observerA() {
+    log("counter value changed! ${viewModel.counter.value}",
+        name: "Observer A");
+  }
+
+  void observerB() {
+    log("counter value changed! ${viewModel.counter.value}",
+        name: "Observer B");
+  }
+
+  @override
   Widget build(BuildContext context) {
-    return Scaffold(
-        appBar: _appBar(),
-        body: Center(child: _counterSection()),
-        floatingActionButton: _floatingActionButton());
+    return Scaffold(appBar: _appBar(), body: Center(child: _counterSection()));
   }
 
   AppBar _appBar() => AppBar(
@@ -33,11 +49,33 @@ class _MainPageState extends StateWithViewModel<MainPage, MainViewModel> {
           '${viewModel.counter.value}',
           style: Theme.of(context).textTheme.headlineMedium,
         ),
+        const SizedBox(height: 24),
+        textButton("Increment", onTap: viewModel.incrementCounter),
+        textButton("Cancel Observer A", onTap: () {
+          viewModel.counter.cancelObserve(observerA);
+          log("Observer A is canceled!", name: "Observer A");
+        }),
+        textButton("Cancel Observer B", onTap: () {
+          viewModel.counter.cancelObserve(observerB);
+          log("Observer B is canceled!", name: "Observer B");
+        }),
+        const SizedBox(height: 24),
+        const Divider(),
+        const SizedBox(height: 24),
+        SelectBuilder(
+            rx: viewModel.counter2,
+            builder: (context, value) {
+              return Text('Counter2: $value',
+                  style: Theme.of(context).textTheme.headlineSmall);
+            }),
+        textButton("decrease Counter2 (${viewModel.counter2.value})",
+            onTap: viewModel.decreaseCounter2),
+        const SizedBox(height: 24),
+        textButton("rebuild! (setState)", onTap: () => setState(() {})),
       ]);
-
-  FloatingActionButton _floatingActionButton() => FloatingActionButton(
-        onPressed: viewModel.incrementCounter,
-        tooltip: 'Increment',
-        child: const Icon(Icons.add),
-      );
 }
+
+Widget textButton(String text, {required VoidCallback onTap}) => Padding(
+      padding: const EdgeInsets.all(4),
+      child: ElevatedButton(onPressed: onTap, child: Text(text)),
+    );

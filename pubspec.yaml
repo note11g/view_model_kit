@@ -1,6 +1,6 @@
 name: view_model_kit
 description: A simple and easy ViewModel and state management Library.
-version: 0.0.1
+version: 0.0.2
 homepage: https://github.com/note11g/view_model_kit
 
 environment:
