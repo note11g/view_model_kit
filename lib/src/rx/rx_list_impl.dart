@@ -13,7 +13,6 @@ class RList<V> extends BaseR<List<V>> {
 
   /// do not write with this list.
   @override
-  @protected
   List<V> get value => _list;
 
   V operator [](int index) => _list[index];
