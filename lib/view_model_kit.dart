@@ -15,3 +15,5 @@ part 'src/rx/rx_list_impl.dart';
 part 'src/rx/rx_value_extension.dart';
 
 part 'src/select_builder_widget.dart';
+
+part 'src/rx_container.dart';

@@ -5,7 +5,7 @@ class R<V> extends BaseR<V> {
   V _value;
 
   @override
-  late final void Function() _notifyAtStatefulWidget;
+  late final void Function()? _notifyAtStatefulWidget;
 
   R._(this._value);
 

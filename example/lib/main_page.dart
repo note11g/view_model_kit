@@ -44,6 +44,12 @@ class _MainPageState extends StateWithViewModel<MainPage, MainViewModel> {
 
   Widget _counterSection() =>
       Column(mainAxisAlignment: MainAxisAlignment.center, children: [
+        _defaultCounterSection(),
+        const Divider(height: 48, thickness: 2),
+        _counterWithSelectBuilderSection(),
+      ]);
+
+  Widget _defaultCounterSection() => Column(children: [
         const Text('You have pushed the button this many times:'),
         Text(
           '${viewModel.counter.value}',
@@ -59,9 +65,9 @@ class _MainPageState extends StateWithViewModel<MainPage, MainViewModel> {
           viewModel.counter.cancelObserve(observerB);
           log("Observer B is canceled!", name: "Observer B");
         }),
-        const SizedBox(height: 24),
-        const Divider(),
-        const SizedBox(height: 24),
+      ]);
+
+  Widget _counterWithSelectBuilderSection() => Column(children: [
         SelectBuilder(
             rx: viewModel.counter2,
             builder: (context, value) {
@@ -70,12 +76,11 @@ class _MainPageState extends StateWithViewModel<MainPage, MainViewModel> {
             }),
         textButton("decrease Counter2 (${viewModel.counter2.value})",
             onTap: viewModel.decreaseCounter2),
-        const SizedBox(height: 24),
         textButton("rebuild! (setState)", onTap: () => setState(() {})),
       ]);
-}
 
-Widget textButton(String text, {required VoidCallback onTap}) => Padding(
-      padding: const EdgeInsets.all(4),
-      child: ElevatedButton(onPressed: onTap, child: Text(text)),
-    );
+  Widget textButton(String text, {required VoidCallback onTap}) => Padding(
+        padding: const EdgeInsets.all(4),
+        child: ElevatedButton(onPressed: onTap, child: Text(text)),
+      );
+}

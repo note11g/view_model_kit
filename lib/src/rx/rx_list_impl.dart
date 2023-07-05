@@ -5,7 +5,7 @@ class RList<V> extends BaseR<List<V>> {
   final List<V> _list;
 
   @override
-  late final void Function() _notifyAtStatefulWidget;
+  late final void Function()? _notifyAtStatefulWidget;
 
   RList._(this._list);
 

@@ -8,18 +8,16 @@ abstract class BaseR<V> {
   void observe(void Function() observer) => _observers.add(observer);
 
   /// cancel observing value changes.
-  void cancelObserve(void Function() listener) {
-    _observers.remove(listener);
-  }
+  void cancelObserve(void Function() listener) => _observers.remove(listener);
 
   /* ----- Private ----- */
 
-  void Function() get _notifyAtStatefulWidget;
+  void Function()? get _notifyAtStatefulWidget;
 
   final List<void Function()> _observers = [];
 
   void _notify() {
-    if (_enableDefaultNotify) _notifyAtStatefulWidget();
+    if (_enableDefaultNotify) _notifyAtStatefulWidget?.call();
     for (final observer in _observers) {
       observer.call();
     }
