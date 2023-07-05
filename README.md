@@ -44,7 +44,7 @@ class MainViewModel extends BaseViewModel {
 }
 ```
 
-### 2. Use R<V> or RList<V> with ViewModel
+### 2. Use `R<V>` or `RList<V>` with ViewModel
 
 ```dart
 class MainViewModel extends BaseViewModel {
@@ -66,7 +66,7 @@ class MainViewModel extends BaseViewModel {
 }
 ```
 
-### 3. Use R<V> or RList<V> with Widget
+### 3. Use `R<V>` or `RList<V>` with Widget
 
 ```dart
 @override
