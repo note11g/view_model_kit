@@ -1,6 +1,6 @@
 name: view_model_kit
 description: A simple and easy ViewModel and state management Library. support ViewModel's state hold, Global state management. (Container's state hold)
-version: 0.0.4
+version: 0.0.5
 homepage: https://github.com/note11g/view_model_kit
 
 environment:

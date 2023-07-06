@@ -47,7 +47,7 @@ class MainViewModel extends BaseViewModel {
 ```dart
 class MainViewModel extends BaseViewModel {
   late final count = create(0);
-  late final todos = createList<Todo>([]);
+  late final todos = createList<Todo>(); // or createList<Todo>([]);
 
   @override
   void onReady() async {

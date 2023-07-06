@@ -1,3 +1,6 @@
+## 0.0.5
+- createList() method can use without initial value.
+
 ## 0.0.4
 - add BaseContainer(can use R or RList without ViewModel)
 
