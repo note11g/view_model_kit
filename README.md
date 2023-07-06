@@ -7,8 +7,6 @@ A simple and easy ViewModel and state management Library.
 ## How to use
 
 see examples.
-[main_page.dart](https://github.com/note11g/view_model_kit/blob/main/example/lib/main_page.dart)
-[main_view_model.dart](https://github.com/note11g/view_model_kit/blob/main/example/lib/main_view_model.dart)
 
 ### 1. Setting StatefulWidget and Create ViewModel
 
@@ -66,7 +64,7 @@ class MainViewModel extends BaseViewModel {
 }
 ```
 
-### 3. Use `R<V>` or `RList<V>` with Widget
+### 3. Use `R<V>` or `RList<V>` with Widget (at `StateWithViewModel`)
 
 ```dart
 @override
@@ -104,7 +102,7 @@ Widget build(BuildContext context) {
 
 ### 5. Global State Manage Container
 
-in this example, use [GetIt](https://pub.dev/packages/get_it).
+in this example, using [GetIt](https://pub.dev/packages/get_it).
 
 ```main_container.dart```
 
@@ -132,10 +130,12 @@ class Counter1Page extends StatelessWidget {
   Widget build(BuildContext context) {
     final container = GetIt.instance<MainContainer>();
     return Scaffold(
-      body: Center(child:
-      ElevatedButton(
-          child: Text("Page1 count up : ${container.globalCount.value}"),
-          onPressed: () => container.globalCount.value++),
+      body: Center(child: SelectBuilder(
+        rx: container.globalCount,
+        builder: (context, value) => ElevatedButton(
+            child: Text("Page1 count up : $value"),
+            onPressed: () => container.globalCount.value++),
+        ),
       ),
     );
   }
@@ -150,9 +150,12 @@ class Counter2Page extends StatelessWidget {
   Widget build(BuildContext context) {
     final container = GetIt.instance<MainContainer>();
     return Scaffold(
-      body: Center(child: ElevatedButton(
-          child: Text("Page2 count up : ${container.globalCount.value}"),
-          onPressed: () => container.globalCount.value++),
+      body: Center(child: SelectBuilder(
+        rx: container.globalCount,
+        builder: (context, value) => ElevatedButton(
+            child: Text("Page1 count up : $value"),
+            onPressed: () => container.globalCount.value++),
+        ),
       ),
     );
   }
