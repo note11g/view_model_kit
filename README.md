@@ -128,7 +128,7 @@ void main() {
 class Counter1Page extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
-    final container = GetIt.instance<MainContainer>();
+    final container = GetIt.instance.get<MainContainer>();
     return Scaffold(
       body: Center(child: SelectBuilder(
         rx: container.globalCount,
@@ -148,7 +148,7 @@ class Counter1Page extends StatelessWidget {
 class Counter2Page extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
-    final container = GetIt.instance<MainContainer>();
+    final container = GetIt.instance.get<MainContainer>();
     return Scaffold(
       body: Center(child: SelectBuilder(
         rx: container.globalCount,
