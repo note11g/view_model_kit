@@ -10,7 +10,7 @@ extension CreateReactiveValueWithViewModel on BaseViewModel {
   }
 
   /// create Reactive List
-  RList<V> createList<V>(List<V> list) {
+  RList<V> createList<V>([List<V>? list]) {
     final rx = RList._(list);
     rx._notifyAtStatefulWidget = notify;
     _addRxDisposer(rx._dispose);
@@ -27,7 +27,7 @@ extension CreateReactiveValueWithRContainer on BaseContainer {
   }
 
   /// create Reactive List
-  RList<V> createList<V>(List<V> list) {
+  RList<V> createList<V>([List<V>? list]) {
     final rx = RList._(list);
     rx._notifyAtStatefulWidget = null;
     return rx;
