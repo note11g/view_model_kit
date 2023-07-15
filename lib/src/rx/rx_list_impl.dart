@@ -36,6 +36,16 @@ class RList<V> extends BaseR<List<V>> {
     _notify();
   }
 
+  void insert(int index, V element) {
+    _list.insert(index, element);
+    _notify();
+  }
+
+  void insertAll(int index, Iterable<V> iterable) {
+    _list.insertAll(index, iterable);
+    _notify();
+  }
+
   bool remove(Object? value) {
     final res = _list.remove(value);
     _notify();

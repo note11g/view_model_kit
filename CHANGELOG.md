@@ -1,3 +1,6 @@
+## 0.0.6
+- add RList.insert method
+
 ## 0.0.5
 - createList() method can use without initial value.
 
