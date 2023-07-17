@@ -35,7 +35,7 @@ class _SelectBuilderState<V> extends State<SelectBuilder<V>> {
     super.dispose();
   }
 
-  void _notifyAtThisWidget() {
+  void _notifyAtThisWidget(V value) {
     if (mounted) setState(() {});
   }
 }

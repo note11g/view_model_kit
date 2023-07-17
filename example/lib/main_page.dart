@@ -22,14 +22,12 @@ class _MainPageState extends StateWithViewModel<MainPage, MainViewModel> {
     viewModel.counter.observe(observerB);
   }
 
-  void observerA() {
-    log("counter value changed! ${viewModel.counter.value}",
-        name: "Observer A");
+  void observerA(int value) {
+    log("counter value changed! $value", name: "Observer A");
   }
 
-  void observerB() {
-    log("counter value changed! ${viewModel.counter.value}",
-        name: "Observer B");
+  void observerB(int value) {
+    log("counter value changed! $value", name: "Observer B");
   }
 
   @override

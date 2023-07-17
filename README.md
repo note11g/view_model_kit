@@ -161,3 +161,47 @@ class Counter2Page extends StatelessWidget {
   }
 }
 ```
+
+### 6. Observer
+
+```dart
+class ObserveTestPage extends StatefulWidget {
+  const ObserveTestPage({super.key});
+
+  @override
+  State<ObserveTestPage> createState() => _ObserveTestPageState();
+}
+
+class _ObserveTestPageState extends StateWithViewModel<ObserveTestPage, ObserveTestViewModel> {
+  @override
+  ObserveTestViewModel createViewModel() => ObserveTestViewModel();
+  
+  final mainContainer = GetIt.instance.get<MainContainer>();
+
+  @override
+  void initState() {
+    super.initState();
+    /// viewModel.counter lifecycle is same as this Stateful Widget. not has observer.
+    viewModel.counter.observe((v) => print("counter value changed! : $v"));
+    
+    /// but, mainContainer.globalCount lifecycle is very different. (not depend on this Stateful Widget)
+    /// that's means globalCount must be `cancelObserve` when dispose.
+    mainContainer.globalCount.observe(observeGlobalCount);
+  }
+  
+  void observeGlobalCount(int v) {
+    print("globalCount value changed! : $v");
+  }
+
+  @override
+  void dispose() {
+    mainContainer.globalCount.cancelObserve(observeGlobalCount);
+    super.dispose();
+  }
+  
+  @override
+  Widget build(BuildContext context) {
+    return const Placeholder();
+  }
+}
+```

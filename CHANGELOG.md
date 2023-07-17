@@ -1,3 +1,6 @@
+## 0.1.0
+- support `.observe((v) {})` method.
+
 ## 0.0.6
 - add RList.insert method
 
