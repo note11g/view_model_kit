@@ -17,7 +17,7 @@ abstract class BaseR<V> {
 
   void Function()? get _notifyAtStatefulWidget;
 
-  final List<ObserveFunction<V>> _observers = [];
+  final Set<ObserveFunction<V>> _observers = {};
 
   void _notify() {
     if (_enableDefaultNotify) _notifyAtStatefulWidget?.call();

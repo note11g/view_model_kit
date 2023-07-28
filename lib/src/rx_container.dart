@@ -1,6 +1,6 @@
 part of view_model_kit;
 
-abstract class BaseContainer {
+abstract class BaseContainer implements BaseRxCreator {
   BaseContainer() {
     onCreate();
   }

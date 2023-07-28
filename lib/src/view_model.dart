@@ -1,6 +1,6 @@
 part of view_model_kit;
 
-abstract class BaseViewModel {
+abstract class BaseViewModel implements BaseRxCreator {
   /// Notify to Stateful Widget.
   void notify() => _notifyAtStatefulWidget();
 

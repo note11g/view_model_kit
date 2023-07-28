@@ -1,15 +1,24 @@
 import 'package:view_model_kit/view_model_kit.dart';
 
 class MainViewModel extends BaseViewModel {
-  late final counter = create(0);
-  late final counter2 = create(0);
+  late final _counter = createMutable(0);
+  R<int> get counter => _counter;
+  late final _counter2 = createMutable(0);
+  R<int> get counter2 => _counter2;
+
+  late final _resultList = createMutableList<int>();
+  RList<int> get resultList => _resultList;
 
   void incrementCounter() {
-    counter.value++;
+    _counter.value++;
+    _resultList.add(_counter.value);
   }
 
   void decreaseCounter2() {
-    counter2.value--;
+    _counter2.value--;
+    _resultList.value.add(_counter2.value);
+
+    /// using rxList.value prevent rebuild.
   }
 
   @override

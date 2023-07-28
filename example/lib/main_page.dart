@@ -45,6 +45,8 @@ class _MainPageState extends StateWithViewModel<MainPage, MainViewModel> {
         _defaultCounterSection(),
         const Divider(height: 48, thickness: 2),
         _counterWithSelectBuilderSection(),
+        const Divider(height: 48, thickness: 2),
+        Text(viewModel.resultList.toString()),
       ]);
 
   Widget _defaultCounterSection() => Column(children: [

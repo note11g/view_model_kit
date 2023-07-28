@@ -46,20 +46,25 @@ class MainViewModel extends BaseViewModel {
 
 ```dart
 class MainViewModel extends BaseViewModel {
-  late final count = create(0);
-  late final todos = createList<Todo>(); // or createList<Todo>([]);
+  late final _count = createMutable(0); // can modify. (MutableR<V>)
+  R<int> get count => _count; // can not modify. (R<V>)
+  late final _todos = createMutableList<Todo>(); // or createMutableList<Todo>([]);
+  RList<Todo> get todos => _todos; // can not modify. (RList<V>)
 
   @override
   void onReady() async {
-    count.value = 1; // auto rebuild.
-    count.value++; // auto rebuild.
+    _count.value = 1; // auto rebuild.
+    _count.value++; // auto rebuild.
+    // count.value = 1; // error. because type of count is R<V>. use instead of MutableR<V>.value = 1;
 
     final todos = await getTodosFromRemote();
 
-    todos.addAll([...todos]); // auto rebuild.
+    _todos.addAll([...todos]); // auto rebuild.
+    // todo.addAll([...todos]); // error. because type of count is RList<V>. use instead of MutableRList<V>.addAll;
+
     //but...
-    print(todos.value); // ok
-    print(todos.value.addAll([...todos])); // not rebuild. use instead of todos.addAll([...todos]);
+    print(_todos.value); // ok
+    print(_todos.value.addAll([...todos])); // not rebuild. use instead of todos.addAll([...todos]);
   }
 }
 ```
@@ -108,7 +113,12 @@ in this example, using [GetIt](https://pub.dev/packages/get_it).
 
 ```dart
 class MainContainer extends BaseContainer {
-  late final globalCount = create(0);
+  late final _globalCount = createMutable(0);
+  R<int> get globalCount => _globalCount;
+  
+  void incrementGlobalCount() {
+    _globalCount.value++;
+  }
 }
 ```
 
@@ -134,7 +144,7 @@ class Counter1Page extends StatelessWidget {
         rx: container.globalCount,
         builder: (context, value) => ElevatedButton(
             child: Text("Page1 count up : $value"),
-            onPressed: () => container.globalCount.value++),
+            onPressed: () => container.incrementGlobalCount()),
         ),
       ),
     );
@@ -153,8 +163,8 @@ class Counter2Page extends StatelessWidget {
       body: Center(child: SelectBuilder(
         rx: container.globalCount,
         builder: (context, value) => ElevatedButton(
-            child: Text("Page1 count up : $value"),
-            onPressed: () => container.globalCount.value++),
+            child: Text("Page2 count up : $value"),
+            onPressed: () => container.incrementGlobalCount()),
         ),
       ),
     );

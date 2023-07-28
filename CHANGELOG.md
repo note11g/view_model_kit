@@ -1,3 +1,7 @@
+## 0.2.0
+- support `MutableR<V>`, `MutableRList<V>`. need migration from `R<V>`, `RList<V>`.
+- add `MutableRList<V>` some method.
+
 ## 0.1.0
 - support `.observe((v) {})` method.
 

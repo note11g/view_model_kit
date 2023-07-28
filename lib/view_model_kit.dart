@@ -1,5 +1,8 @@
 library view_model_kit;
 
+import 'dart:collection';
+import 'dart:math';
+
 import 'package:flutter/widgets.dart';
 
 part 'src/view_model.dart';
