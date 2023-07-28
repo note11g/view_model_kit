@@ -10,10 +10,17 @@ abstract class BaseR<V> {
   void observe(ObserveFunction<V> observer) => _observers.add(observer);
 
   /// cancel observing value changes.
-  void cancelObserve(ObserveFunction<V> listener) =>
+  void cancelObserve(ObserveFunction<V> listener) {
+    if (_synchronizeLock) {
+      _markedRemoveObservers.add(listener);
+    } else {
       _observers.remove(listener);
+    }
+  }
 
   /* ----- Private ----- */
+  bool _synchronizeLock = false;
+  final Set<ObserveFunction<V>> _markedRemoveObservers = {};
 
   void Function()? get _notifyAtStatefulWidget;
 
@@ -21,9 +28,14 @@ abstract class BaseR<V> {
 
   void _notify() {
     if (_enableDefaultNotify) _notifyAtStatefulWidget?.call();
+
+    _synchronizeLock = true;
     for (final observer in _observers) {
       observer.call(value);
     }
+    _synchronizeLock = false;
+    _markedRemoveObservers.forEach(cancelObserve);
+    _markedRemoveObservers.clear();
   }
 
   void _dispose() {

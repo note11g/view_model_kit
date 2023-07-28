@@ -1,3 +1,6 @@
+## 0.2.1
+- fix synchronize bug.
+
 ## 0.2.0
 - support `MutableR<V>`, `MutableRList<V>`. need migration from `R<V>`, `RList<V>`.
 - add `MutableRList<V>` some method.
