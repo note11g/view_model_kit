@@ -57,10 +57,10 @@ class MainViewModel extends BaseViewModel {
     _count.value++; // auto rebuild.
     // count.value = 1; // error. because type of count is R<V>. use instead of MutableR<V>.value = 1;
 
-    final todos = await getTodosFromRemote();
+    final todosFromRemote = await getTodosFromRemote();
 
-    _todos.addAll([...todos]); // auto rebuild.
-    // todo.addAll([...todos]); // error. because type of count is RList<V>. use instead of MutableRList<V>.addAll;
+    _todos.addAll([...todosFromRemote]); // auto rebuild.
+    // todos.addAll([...todosFromRemote]); // error. because type of count is RList<V>. use instead of MutableRList<V>.addAll;
 
     //but...
     print(_todos.value); // ok
